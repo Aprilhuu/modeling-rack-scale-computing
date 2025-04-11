@@ -1,0 +1,60 @@
+architecture:
+  version: 0.4
+  nodes:
+  - !Container
+    name: rack
+    spatial: {meshX: {{X}}, meshY: {{Y}}}
+    attributes: unless overridden
+      technology: "45nm"
+      global_cycle_seconds: 1e-9
+      datawidth: 16
+
+  - !Component
+    name: global_DRAM  # global rack DRAM
+    class: DRAM
+    attributes:
+      width: width
+      datawidth: datawidth
+      depth: depth
+
+  - !Container
+    name: PE # this is each GPU
+    spatial: {meshX: {{X}}, meshY: {{Y}}}
+
+  - !Component
+    name: DRAM  # global GPU DRAM
+    class: DRAM
+    attributes:
+      width: width
+      datawidth: datawidth
+      depth: depth
+
+  - !Component
+    name: l2_cache
+    class: SRAM
+    attributes:
+      width: 128
+      depth: 2048
+      datawidth: datawidth
+      n_banks: 1
+      n_rdwr_ports: 2
+
+  - !Container
+    name: block
+    spatial: {meshX: {{blocks_per_gpu}}} # 2 dimensional
+
+  # threads for the block
+  - !Container
+    name: thread
+    spatial: {meshX: {{threads_per_block}}}
+
+  # registers for each thread
+  - !Component
+    name: thread_reg
+    class: reg_storage
+    attributes: {depth: 16, width: 16, datawidth: datawidth}
+
+  - !Component
+    name: mac
+    class: mac_compute
+    attributes: {num_pipline_stages: 2, datawidth: datawidth}

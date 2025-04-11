@@ -1,0 +1,25 @@
+problem:
+  version: 0.4
+  shape:
+    name: "Transformer3"
+    dimensions: [ B, M, P, E ]
+
+    data_spaces:
+    - name: Q
+      projection:
+      - [ [B] ]
+      - [ [P] ]
+      - [ [E] ]
+    - name: K
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [E] ]
+    - name: QK
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [P] ]
+      read_write: True
+
+  instance:

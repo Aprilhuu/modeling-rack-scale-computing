@@ -1,0 +1,18 @@
+problem:
+    - shape:
+      name: Fc
+      dimensions: [ B, M, I, O ]
+      data_spaces:
+      - name: input
+        dimensions: [ Fmap1_B, Fmap1_M, Fmap1_I ]
+        projection: '[ B, M, I ]'
+      - name: weights
+        dimensions: [ Filter1_I, Filter1_O ]
+        projection: '[ I, O ]'
+      - name: out
+        dimensions: [ Fmap2_B, Fmap2_M, Fmap2_O ]
+        projection: '[ B, M, O ]'
+        read_write: True
+
+    instance: >-
+      0 <= B < 128 and 0 <= M < 64 and 0 <= I < 64 and 0 <= O < 64
