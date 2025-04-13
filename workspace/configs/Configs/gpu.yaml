@@ -29,16 +29,6 @@ architecture:
       datawidth: 16
       depth: 512000000
 
-  - !Component
-    name: l2_cache
-    class: SRAM
-    attributes:
-      width: 256
-      depth: 2048
-      datawidth: 16
-      n_banks: 1
-      n_rdwr_ports: 2
-
   - !Container
     name: block
     spatial: {meshX: {{512}}} # 2 dimensional
