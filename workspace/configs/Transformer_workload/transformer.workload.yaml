@@ -15,7 +15,8 @@ problem:
           projection: '[ B, M, E ]'
           read_write: True
     
-      instance:
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= D < 128
 
     - shape:
         name: "Transformer2"
@@ -33,7 +34,8 @@ problem:
           projection: '[ B, M, E ]'
           read_write: True
 
-      instance:
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= D < 128
 
     - shape:
         name: "Transformer3"
@@ -53,7 +55,8 @@ problem:
           projection: '[ B, M, P ]'
           read_write: True
     
-      instance:
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= P < 512
 
     - shape:
         name: "Transformer7"
@@ -71,7 +74,8 @@ problem:
           projection: '[B, M, F]'
           read_write: True
     
-      instance:
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= F < 128 and 0 <= D < 128
 
     - shape:
         name: "Transformer8"
@@ -89,7 +93,8 @@ problem:
           projection: '[B, P, F]'
           read_write: True
     
-      instance:
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= F < 128 and 0 <= P < 512
 
     - shape:
         name: "Transformer9"
@@ -107,4 +112,5 @@ problem:
           projection: '[B, P, G]'
           read_write: True
     
-      instance:
+      instance: >-
+        0 <= B < 16 and 0 <= P < 512 and 0 <= F < 128 and 0 <= G < 128
