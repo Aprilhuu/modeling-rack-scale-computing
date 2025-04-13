@@ -1,0 +1,28 @@
+problem:
+  version: 0.4
+  shape:
+    name: "Transformer7"
+    dimensions: [ B, M, F, D ]
+
+    data_spaces:
+    - name: I
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [D] ]
+    - name: WV
+      projection:
+      - [ [D] ]
+      - [ [F] ]
+    - name: V
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [F] ]
+      read_write: True
+
+  instance:
+    B: 16
+    M: 512
+    F: 128
+    D: 128

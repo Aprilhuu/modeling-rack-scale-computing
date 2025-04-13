@@ -1,0 +1,28 @@
+problem:
+  version: 0.4
+  shape:
+    name: "Transformer1"
+    dimensions: [ B, M, E, D ]
+
+    data_spaces:
+    - name: I
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [D] ]
+    - name: WK
+      projection:
+      - [ [D] ]
+      - [ [E] ]
+    - name: Outputs
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [E] ]
+      read_write: True
+
+  instance:
+    B: 16
+    M: 512
+    E: 128
+    D: 128

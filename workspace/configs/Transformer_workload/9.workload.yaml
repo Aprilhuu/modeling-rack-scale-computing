@@ -1,0 +1,28 @@
+problem:
+  version: 0.4
+  shape:
+    name: "Transformer9"
+    dimensions: [ B, P, F, G ]
+
+    data_spaces:
+    - name: AV
+      projection:
+      - [ [B] ]
+      - [ [P] ]
+      - [ [F] ]
+    - name: WZ
+      projection:
+      - [ [F] ]
+      - [ [G] ]
+    - name: Z
+      projection:
+      - [ [B] ]
+      - [ [P] ]
+      - [ [G] ]
+      read_write: True
+
+  instance:
+    B: 16
+    P: 512
+    F: 128
+    G: 128

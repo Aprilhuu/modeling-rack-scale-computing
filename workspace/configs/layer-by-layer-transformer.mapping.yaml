@@ -1,0 +1,58 @@
+mapping:
+  type: fused
+  nodes:
+  - type: storage
+    target: 0  # level 2 is bound to MainMemory
+    dspace: [I, WQ, WK, Q, Outputs]
+  - type: storage
+    target: 1  # level 1 is bound to GlobalBuffer
+    dspace: [I, Filter2]
+  - type: temporal 
+    rank: P2
+    tile_shape: 1
+  - type: storage
+    target: 1  # level 1 is bound to GlobalBuffer
+    dspace: [Fmap1, Fmap2, Fmap3]
+
+  - type: temporal
+    branches:
+    - - type: storage
+        target: 1  # level 1 is bound to GlobalBuffer
+        dspace: [I]
+      - type: temporal
+        rank: B
+        tile_shape: 1 # one batch at a time?
+      - type: storage 
+        target: 1
+        dspace: [WQ]
+      - type: temporal
+        rank: M # Seq length
+        tile_shape: 4
+      - type: temporal
+        rank: E # Output Embedding
+        tile_shape: 8
+      - type: temporal
+        rank: D # Input Embedding
+        tile_shape: 8
+      - type: compute 
+        einsum: Transformer1  # I[b, m, d] * WQ[d, e] -> Q[b, m, e]
+        target: 2
+
+    - - type: storage
+        target: 1
+        dspace: [WK]
+      - type: temporal
+        rank: B
+        tile_shape: 1
+      - type: temporal
+        rank: M
+        tile_shape: 4
+      - type: temporal
+        rank: E
+        tile_shape: 8
+      - type: temporal
+        rank: D
+        tile_shape: 8
+      - type: compute
+        einsum: Transformer2  # I[b, m, d] * WK[d, e] -> Outputs[b, m, e]
+        target: 2

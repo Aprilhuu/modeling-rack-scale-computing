@@ -1,0 +1,24 @@
+problem:
+  version: 0.4
+  shape:
+    name: "Transformer6"
+    dimensions: [ B, M, P ]
+
+    data_spaces:
+    - name: SN
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [P] ]
+    - name: SD
+      projection:
+      - [ [B] ]
+      - [ [P] ]
+    - name: A # divide
+      projection:
+      - [ [B] ]
+      - [ [M] ]
+      - [ [P] ]
+      read_write: True
+
+  instance:
