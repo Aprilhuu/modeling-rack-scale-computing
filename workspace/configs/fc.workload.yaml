@@ -16,3 +16,5 @@ problem:
 
     instance: >-
       0 <= B < 128 and 0 <= M < 64 and 0 <= I < 64 and 0 <= O < 64
+
+    - 

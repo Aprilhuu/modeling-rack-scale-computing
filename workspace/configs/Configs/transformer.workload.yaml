@@ -1,0 +1,116 @@
+problem:
+    - shape:
+        name: "Transformer1"
+        dimensions: [ B, M, E, D ]
+    
+        data_spaces:
+        - name: I
+          dimensions: [I_B, I_M, I_D]
+          projection: '[ B, M, D ]'
+        - name: WK
+          dimensions: [WK_D, WK_E]
+          projection: '[ D, E ]'
+        - name: K
+          dimensions: [K_B, K_M, K_E]
+          projection: '[ B, M, E ]'
+          read_write: True
+    
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= D < 128
+
+    - shape:
+        name: "Transformer2"
+        dimensions: [ B, M, E, D ]
+    
+        data_spaces:
+        - name: I
+          dimensions: [I_B, I_M, I_D]
+          projection: '[ B, M, D ]'
+        - name: WQ
+          dimensions: [WQ_D, WQ_E]
+          projection: '[ D, E ]'
+        - name: Q
+          dimensions: [Q_B, Q_M, Q_E]
+          projection: '[ B, M, E ]'
+          read_write: True
+
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= D < 128
+
+    - shape:
+        name: "Transformer3"
+        dimensions: [ B, M, P, E ]
+    
+        data_spaces:
+        - name: Q
+          dimensions: [Q_B, Q_M, Q_E]
+          projection: '[ B, M, E ]'
+          read_write: True
+        - name: K
+          dimensions: [K_B, K_M, K_E]
+          projection: '[ B, M, E ]'
+          read_write: True
+        - name: QK
+          dimensions: [QK_B, QK_M, QK_P]
+          projection: '[ B, M, P ]'
+          read_write: True
+    
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= P < 512
+
+    - shape:
+        name: "Transformer7"
+        dimensions: [ B, M, F, D ]
+    
+        data_spaces:
+        - name: I
+          dimensions: [I_B, I_M, I_D]
+          projection: '[ B, M, D ]'
+        - name: WV
+          dimensions: [WV_D, WV_F]
+          projection: '[D, F]'
+        - name: V
+          dimensions: [V_B, V_M, V_F]
+          projection: '[B, M, F]'
+          read_write: True
+    
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= F < 128 and 0 <= D < 128
+
+    - shape:
+        name: "Transformer8"
+        dimensions: [ B, M, P, F ]
+    
+        data_spaces:
+        - - name: QK
+          dimensions: [QK_B, QK_M, QK_P]
+          projection: '[ B, M, P ]'
+        - name: V
+          dimensions: [V_B, V_M, V_F]
+          projection: '[B, M, F]'
+        - name: AV
+          dimensions: [AV_B, AV_P, AV_F]
+          projection: '[B, P, F]'
+          read_write: True
+    
+      instance: >-
+        0 <= B < 16 and 0 <= M < 512 and 0 <= F < 128 and 0 <= P < 512
+
+    - shape:
+        name: "Transformer9"
+        dimensions: [ B, P, F, G ]
+    
+        data_spaces:
+        - name: AV
+          dimensions: [AV_B, AV_P, AV_F]
+          projection: '[B, P, F]'
+        - name: WZ
+          dimensions: [WZ_F, WZ_G]
+          projection: '[F, G]'
+        - name: Z
+          dimensions: [Z_B, Z_P, Z_G]
+          projection: '[B, P, G]'
+          read_write: True
+    
+      instance: >-
+        0 <= B < 16 and 0 <= P < 512 and 0 <= F < 128 and 0 <= G < 128

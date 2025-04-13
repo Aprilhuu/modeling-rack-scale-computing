@@ -3,7 +3,7 @@ architecture:
   nodes:
   - !Container
     name: rack
-    spatial: {meshX: {{X}}, meshY: {{Y}}}
+    spatial: {meshX: {{4}}, meshY: {{16}}}
     attributes: unless overridden
       technology: "45nm"
       global_cycle_seconds: 1e-9
