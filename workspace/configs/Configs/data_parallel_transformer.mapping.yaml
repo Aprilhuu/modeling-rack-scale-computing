@@ -11,7 +11,7 @@ mapping:
     branches:
     - - type: spatial
         rank: B
-        tile_shape: 1 #---------------------- split into 4 tiles along channels
+        tile_shape: 4 #---------------------- split into 4 tiles along channels
       - type: temporal
         rank: M
         tile_shape: 1
@@ -26,7 +26,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: spatial
         rank: B
-        tile_shape: 1
+        tile_shape: 4
       - type: temporal
         rank: M
         tile_shape: 1
@@ -41,7 +41,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: spatial
         rank: B
-        tile_shape: 1
+        tile_shape: 4
       - type: temporal
         rank: M
         tile_shape: 1
@@ -56,7 +56,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: spatial
         rank: B
-        tile_shape: 1
+        tile_shape: 4
       - type: temporal
         rank: M
         tile_shape: 1
@@ -71,7 +71,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: spatial
         rank: B
-        tile_shape: 1
+        tile_shape: 4
       - type: temporal
         rank: M
         tile_shape: 1
@@ -86,7 +86,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: spatial
         rank: B
-        tile_shape: 1
+        tile_shape: 4
       - type: temporal
         rank: P
         tile_shape: 1
