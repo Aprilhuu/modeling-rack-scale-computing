@@ -1,0 +1,101 @@
+mapping:
+  type: fused
+  nodes:
+  - type: storage
+    target: 0  # level 0 is bound to global DRAM
+    dspace: [I, WK, K, WQ, Q, QK, WV, V, AV, WZ, Z] #-------- node 2.a
+  - type: storage
+    target: 1  # level 1 is bound to DRAM
+    dspace: [WK, WQ, WV, WZ]
+  - type: sequential  #------------------------------- node 2.d
+    branches:
+    - - type: spatial
+        rank: B
+        tile_shape: 1 #---------------------- split into 4 tiles along channels
+      - type: temporal
+        rank: M
+        tile_shape: 1
+      - type: temporal
+        rank: E
+        tile_shape: 1
+      - type: temporal
+        rank: D
+        tile_shape: 1
+      - type: compute
+        einsum: KeyProjection
+        target: 2  # level 3 is bound to MACC
+    - - type: spatial
+        rank: B
+        tile_shape: 1
+      - type: temporal
+        rank: M
+        tile_shape: 1
+      - type: temporal
+        rank: E
+        tile_shape: 1
+      - type: temporal
+        rank: D
+        tile_shape: 1
+      - type: compute
+        einsum: QueryProjection
+        target: 2  # level 3 is bound to MACC
+    - - type: spatial
+        rank: B
+        tile_shape: 1
+      - type: temporal
+        rank: M
+        tile_shape: 1
+      - type: temporal
+        rank: P
+        tile_shape: 1  
+      - type: temporal
+        rank: E
+        tile_shape: 1  
+      - type: compute
+        einsum: QueryKeyMult
+        target: 2  # level 3 is bound to MACC
+    - - type: spatial
+        rank: B
+        tile_shape: 1
+      - type: temporal
+        rank: M
+        tile_shape: 1
+      - type: temporal
+        rank: F
+        tile_shape: 1 
+      - type: temporal
+        rank: D
+        tile_shape: 1  
+      - type: compute
+        einsum: ValueProjection
+        target: 2  # level 3 is bound to MACC
+    - - type: spatial
+        rank: B
+        tile_shape: 1
+      - type: temporal
+        rank: M
+        tile_shape: 1
+      - type: temporal
+        rank: P
+        tile_shape: 1  
+      - type: temporal
+        rank: F
+        tile_shape: 1  
+      - type: compute
+        einsum: AttentionValue
+        target: 2  # level 3 is bound to MACC
+    - - type: spatial
+        rank: B
+        tile_shape: 1
+      - type: temporal
+        rank: P
+        tile_shape: 1
+      - type: temporal
+        rank: F
+        tile_shape: 1 
+      - type: temporal
+        rank: G
+        tile_shape: 1  
+      - type: compute
+        einsum: Output
+        target: 2  # level 3 is bound to MACC

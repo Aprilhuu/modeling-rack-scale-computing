@@ -1,6 +1,6 @@
 problem:
     - shape:
-        name: "Transformer1"
+        name: KeyProjection
         dimensions: [ B, M, E, D ]
     
         data_spaces:
@@ -19,7 +19,7 @@ problem:
         0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= D < 128
 
     - shape:
-        name: "Transformer2"
+        name: QueryProjection
         dimensions: [ B, M, E, D ]
     
         data_spaces:
@@ -38,7 +38,7 @@ problem:
         0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= D < 128
 
     - shape:
-        name: "Transformer3"
+        name: QueryKeyMult
         dimensions: [ B, M, P, E ]
     
         data_spaces:
@@ -59,7 +59,7 @@ problem:
         0 <= B < 16 and 0 <= M < 512 and 0 <= E < 128 and 0 <= P < 512
 
     - shape:
-        name: "Transformer7"
+        name: ValueProjection
         dimensions: [ B, M, F, D ]
     
         data_spaces:
@@ -78,7 +78,7 @@ problem:
         0 <= B < 16 and 0 <= M < 512 and 0 <= F < 128 and 0 <= D < 128
 
     - shape:
-        name: "Transformer8"
+        name: AttentionValue
         dimensions: [ B, M, P, F ]
     
         data_spaces:
@@ -97,7 +97,7 @@ problem:
         0 <= B < 16 and 0 <= M < 512 and 0 <= F < 128 and 0 <= P < 512
 
     - shape:
-        name: "Transformer9"
+        name: Output
         dimensions: [ B, P, F, G ]
     
         data_spaces:
