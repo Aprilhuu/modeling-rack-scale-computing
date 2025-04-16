@@ -1,0 +1,47 @@
+# mapping_fc1_on_pe_syntax_example.yaml
+mapping:
+  - type: Branch # Encapsulates the mapping for Fc1
+    name: FC1_Mapping
+    subtree:
+      # 1. Outermost Storage (PE DRAM)
+      - type: Storage
+        target: 1 # Needs binding to 'DRAM'
+        keep: [Inputs, Weights, Outputs] # Initially, all data conceptually here
+
+      # 2. Spatial Loop for Blocks
+      - type: Loop
+        rank: P1        # Dimension to parallelize across blocks
+        type: spatial
+        shape: 4        # Tile size per block
+        name: Block_Spatial_P1
+
+      # 3. Storage for L2 Cache (Data needed within a block)
+      - type: Storage
+        target: 2       # Needs binding to 'l2_cache'
+        keep: [Inputs, Weights] # Tiles needed by threads in this block
+        name: L2_Cache_Storage
+
+      # 4. Spatial Loop for Threads
+      - type: Loop
+        rank: M1        # Dimension to parallelize across threads within a block
+        type: spatial
+        shape: 4        # Tile size per thread
+        name: Thread_Spatial_M1
+
+      # 5. Storage for Thread Registers (Data needed within a thread)
+      - type: Storage
+        target: 3       # Needs binding to 'thread_reg'
+        keep: [Inputs, Weights, Outputs] # Elements needed for C1 loop, accumulate output
+        name: Register_Storage
+
+      # 6. Temporal Loop for Reduction (within a thread)
+      - type: Loop
+        rank: C1        # Reduction dimension processed sequentially
+        type: temporal
+        shape: 16       # Tile size per temporal iteration
+        name: MAC_Temporal_C1
+
+      # 7. Compute Leaf Node
+      - type: Compute
+        target: 4       # Needs binding to 'mac'
+        einsum: Fc1     # Specifies this computes Fc1

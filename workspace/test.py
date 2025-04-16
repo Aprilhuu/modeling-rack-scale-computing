@@ -1,9 +1,9 @@
 from pathlib import Path
 from pytimeloop.looptree.run import run_looptree
 
-architecture = 'architecture.yaml'
-workload = 'Configs/transformer.workload.yaml'
-mapping = 'Configs/data_parallel_transformer.mapping.yaml'
+architecture = 'Configs/gpu.yaml'
+workload = 'Configs/two_fc.workload.yaml'
+mapping = 'Configs/data_parallel_fc.mapping.yaml'
 
 bindings = {
     0: 'MainMemory',
