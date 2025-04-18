@@ -15,7 +15,7 @@ problem:
         read_write: True
 
     instance: >-
-      0 <= P1 < 128 and 0 <= M1 < 64 and 0 <= C1 < 64
+      0 <= P1 < 128 and 0 <= M1 < 14336 and 0 <= C1 < 4096
 
   - shape:
       name: Fc2
@@ -33,4 +33,4 @@ problem:
         read_write: True
 
     instance: >-
-      0 <= P2 < 128 and 0 <= M2 < 64 and 0 <= C2 < 64
+      0 <= P2 < 128 and 0 <= M2 < 4096 and 0 <= C2 < 14336

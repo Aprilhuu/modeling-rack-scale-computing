@@ -1,0 +1,29 @@
+mapping:
+  type: fused
+  nodes:
+  - type: storage  #---------------------------------- node 1.a
+    target: 0  # level 2 is bound to MainMemory
+    dspace: [Filter1, Filter2, Fmap1, Fmap2, Fmap3]
+  - type: storage
+    target: 1  # level 1 is bound to GlobalBuffer
+    dspace: [Filter1, Filter2]
+  - type: spatial #---------------------------------- node 2.b
+    rank: M2 # Split to 16 GPUs
+    tile_shape: 8
+  - type: temporal #---------------------------------- node 2.b
+    rank: P2
+    tile_shape: 8 # tile at the sequence dimension, 8 sequences at a time
+  - type: pipeline  #------------------------------- node 1.b
+    branches:
+    - - type: storage #------------------------------- node 1.e
+        target: 1
+        dspace: [Fmap1, Fmap2]
+      - type: compute #------------------------------- node 1.f
+        einsum: Fc1
+        target: 2  # level 0 is bound to MACC
+    - - type: storage #------------------------------- node 1.e
+        target: 1
+        dspace: [Fmap2, Fmap3]
+      - type: compute #------------------------------- node 1.f
+        einsum: Fc2
+        target: 2  # level 0 is bound to MACC
