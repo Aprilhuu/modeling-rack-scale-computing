@@ -1,0 +1,74 @@
+mapping:
+  type: fused
+  nodes:
+  - type: storage
+    target: 0  # level 0 is bound to global DRAM
+    dspace: [I, WK, K, WQ, Q, QK] #-------- node 2.a
+  - type: storage
+    target: 1  # level 1 is bound to DRAM
+    dspace: [I, WK, WQ]
+  - type: spatial #---------------------------------- node 2.b
+    rank: M3 # Split to 16 GPUs
+    tile_shape: 8
+  - type: temporal #---------------------------------- node 2.b
+    rank: P3
+    tile_shape: 16
+  - type: temporal #---------------------------------- node 2.b
+    rank: B3 # Split to 16 GPUs
+    tile_shape: 1
+  - type: pipeline  #------------------------------- node 2.d
+    branches:
+    - - type: storage #------------------------------- node 1.e
+        target: 1
+        dspace: [K]
+      - type: compute
+        einsum: KeyProjection
+        target: 2  # level 3 is bound to MACC
+    - - type: storage #------------------------------- node 1.e
+        target: 1
+        dspace: [Q]
+      - type: compute
+        einsum: QueryProjection
+        target: 2  # level 3 is bound to MACC
+    - - type: storage #------------------------------- node 1.e
+        target: 1
+        dspace: [K, Q, QK]
+      - type: compute
+        einsum: QueryKeyMult
+        target: 2  # level 3 is bound to MACC
+    # - - type: storage #------------------------------- node 1.e
+    #     target: 1
+    #     dspace: [V, I, WV]
+    #   - type: compute
+    #     einsum: ValueProjection
+    #     target: 2  # level 3 is bound to MACC
+    # - - type: spatial
+    #     rank: B5
+    #     tile_shape: 4
+    #   - type: temporal
+    #     rank: M5
+    #     tile_shape: 1
+    #   - type: temporal
+    #     rank: P5
+    #     tile_shape: 1  
+    #   - type: temporal
+    #     rank: F5
+    #     tile_shape: 1  
+    #   - type: compute
+    #     einsum: AttentionValue
+    #     target: 2  # level 3 is bound to MACC
+    # - - type: spatial
+    #     rank: B6
+    #     tile_shape: 4
+    #   - type: temporal
+    #     rank: P6
+    #     tile_shape: 1
+    #   - type: temporal
+    #     rank: F6
+    #     tile_shape: 1 
+    #   - type: temporal
+    #     rank: G6
+    #     tile_shape: 1  
+    #   - type: compute
+    #     einsum: Output
+    #     target: 2  # level 3 is bound to MACC
