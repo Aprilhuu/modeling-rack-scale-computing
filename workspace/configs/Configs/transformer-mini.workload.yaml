@@ -15,7 +15,7 @@ problem:
           read_write: True
     
       instance: >-
-        0 <= B1 < 16 and 0 <= M1 < 512 and 0 <= E1 < 128 and 0 <= D1 < 128
+        0 <= B1 < 16 and 0 <= M1 < 16 and 0 <= E1 < 16 and 0 <= D1 < 16
 
     - shape:
         name: QueryProjection
@@ -34,7 +34,7 @@ problem:
           read_write: True
 
       instance: >-
-        0 <= B2 < 16 and 0 <= M2 < 512 and 0 <= E2 < 128 and 0 <= D2 < 128
+        0 <= B2 < 16 and 0 <= M2 < 16 and 0 <= E2 < 16 and 0 <= D2 < 16
 
     - shape:
         name: QueryKeyMult
@@ -53,7 +53,7 @@ problem:
           read_write: True
     
       instance: >-
-        0 <= B3 < 16 and 0 <= M3 < 512 and 0 <= E3 < 128 and 0 <= P3 < 512
+        0 <= B3 < 16 and 0 <= M3 < 16 and 0 <= E3 < 16 and 0 <= P3 < 16
 
     - shape:
         name: ValueProjection
@@ -72,7 +72,7 @@ problem:
           read_write: True
     
       instance: >-
-        0 <= B4 < 16 and 0 <= M4 < 512 and 0 <= F4 < 128 and 0 <= D4 < 128
+        0 <= B4 < 16 and 0 <= M4 < 16 and 0 <= F4 < 16 and 0 <= D4 < 16
 
     - shape:
         name: AttentionValue
@@ -91,7 +91,7 @@ problem:
           read_write: True
     
       instance: >-
-        0 <= B5 < 16 and 0 <= M5 < 512 and 0 <= F5 < 128 and 0 <= P5 < 512
+        0 <= B5 < 16 and 0 <= M5 < 16 and 0 <= F5 < 16 and 0 <= P5 < 16
 
     - shape:
         name: Output
@@ -110,4 +110,4 @@ problem:
           read_write: True
     
       instance: >-
-        0 <= B6 < 16 and 0 <= P6 < 512 and 0 <= F6 < 128 and 0 <= G6 < 128
+        0 <= B6 < 16 and 0 <= P6 < 16 and 0 <= F6 < 16 and 0 <= G6 < 16

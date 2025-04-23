@@ -16,10 +16,10 @@ architecture:
       class: DRAM
       attributes:
         width: 256
-        depth: 1024 
-        # 16384000000      # Number of entries (approx 16.4G)
+        depth: 16384000000      # Number of entries (approx 16.4G)
                                 # Total size: (1024b * 16.4G) / 8 = ~2 TiB
         datawidth: 16
+      required_actions: ['read', 'write']
    
     - !Container
       name: PE
@@ -33,7 +33,7 @@ architecture:
       class: DRAM
       attributes:
         width: 256
-        depth: 512
+        depth: 512000000
         datawidth: 16
     
     - !Container
@@ -60,8 +60,10 @@ architecture:
     
     - !Component
       name: MACC
-      class: mac_compute
+      class: intmac
       attributes:
         num_pipeline_stages: 2
         datawidth: 16
         width: 16
+        cycle_time: 1e-9
+      required_actions: ['compute']

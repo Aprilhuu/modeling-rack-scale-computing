@@ -2,8 +2,8 @@ from pathlib import Path
 from pytimeloop.looptree.run import run_looptree
 
 architecture = 'Configs/gpu.yaml'
-workload = 'Configs/two_fc.workload.yaml'
-mapping = 'Configs/data_parallel_fc.mapping.yaml'
+workload = 'Configs/transformer.workload.yaml'
+mapping = 'Configs/data_parallel_transformer.mapping.yaml'
 
 bindings = {
     0: 'MainMemory',
@@ -19,4 +19,4 @@ stats = run_looptree(
     call_accelergy=True
 )
 print('Latency:', stats.latency)
-print('Energy:')
+print('Energy:', stats.energy)
