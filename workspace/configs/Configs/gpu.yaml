@@ -23,7 +23,7 @@ architecture:
    
     - !Container
       name: PE
-      spatial: {meshX: 16}
+      spatial: {meshX: 8}
       attributes: # Apply to rack scope unless overridden
         width: 256
         datawidth: 16
@@ -35,6 +35,7 @@ architecture:
         width: 256
         depth: 512000000
         datawidth: 16
+      required_actions: ['read', 'write']
     
     - !Container
       name: block
@@ -52,17 +53,18 @@ architecture:
     
     - !Component
       name: thread_reg
-      class: DRAM
+      class: regfile
       attributes:
         depth: 16
         width: 16
         datawidth: 16
+      required_actions: ['read', 'write']
     
     - !Component
       name: MACC
       class: intmac
       attributes:
-        num_pipeline_stages: 2
+        num_pipeline_stages: 1
         datawidth: 16
         width: 16
         cycle_time: 1e-9

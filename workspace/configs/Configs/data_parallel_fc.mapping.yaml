@@ -17,7 +17,10 @@ mapping:
     branches:
     - - type: spatial
         rank: C1
-        tile_shape: 16 #---------------------- split into 4 tiles along channels
+        tile_shape: 2048 #---------------------- split into 4 tiles along channels
+      - type: temporal
+        rank: C1
+        tile_shape: 1
       - type: temporal
         rank: M1
         tile_shape: 1
@@ -26,7 +29,10 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: spatial
         rank: C2
-        tile_shape: 16
+        tile_shape: 3584
+      - type: temporal
+        rank: C2
+        tile_shape: 1
       - type: temporal
         rank: M2
         tile_shape: 1
