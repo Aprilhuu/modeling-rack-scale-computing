@@ -23,7 +23,7 @@ architecture:
    
     - !Container
       name: PE
-      spatial: {meshX: 8}
+      spatial: {meshX: 16}
       attributes: # Apply to rack scope unless overridden
         width: 256
         datawidth: 16

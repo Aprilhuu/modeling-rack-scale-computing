@@ -10,26 +10,17 @@ mapping:
   - type: temporal
     rank: B6
     tile_shape: 16
-  # - type: temporal
-  #   rank: B1
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B2
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B3
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B4
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B5
-  #   tile_shape: 8
   - type: sequential  #------------------------------- node 2.d
     branches:
-    - - type: temporal
+    - - type: spatial
+        rank: B1
+        tile_shape: 1 #---------------------- split into 4 tiles along channels
+      - type: temporal
+        rank: B1
+        tile_shape: 1
+      - type: temporal
         rank: M1
-        tile_shape: 64
+        tile_shape: 512//(64*32)
       - type: spatial
         rank: M1
         tile_shape: 1
@@ -42,10 +33,13 @@ mapping:
       - type: compute
         einsum: KeyProjection
         target: 2  # level 3 is bound to MACC
-    - - type: temporal
-        rank: M2
-        tile_shape: 64
-      - type: spatial
+    - - type: spatial
+        rank: B2
+        tile_shape: 1
+      - type: temporal
+        rank: B2
+        tile_shape: 1
+      - type: temporal
         rank: M2
         tile_shape: 1
       - type: temporal
@@ -57,10 +51,13 @@ mapping:
       - type: compute
         einsum: QueryProjection
         target: 2  # level 3 is bound to MACC
-    - - type: temporal
-        rank: M3
-        tile_shape: 64
-      - type: spatial
+    - - type: spatial
+        rank: B3
+        tile_shape: 1
+      - type: temporal
+        rank: B3
+        tile_shape: 1
+      - type: temporal
         rank: M3
         tile_shape: 1
       - type: temporal
@@ -72,10 +69,13 @@ mapping:
       - type: compute
         einsum: QueryKeyMult
         target: 2  # level 3 is bound to MACC
-    - - type: temporal
-        rank: M4
-        tile_shape: 64
-      - type: spatial
+    - - type: spatial
+        rank: B4
+        tile_shape: 1
+      - type: temporal
+        rank: B4
+        tile_shape: 1
+      - type: temporal
         rank: M4
         tile_shape: 1
       - type: temporal
@@ -87,10 +87,13 @@ mapping:
       - type: compute
         einsum: ValueProjection
         target: 2  # level 3 is bound to MACC
-    - - type: temporal
-        rank: M5
-        tile_shape: 64
-      - type: spatial
+    - - type: spatial
+        rank: B5
+        tile_shape: 1
+      - type: temporal
+        rank: B5
+        tile_shape: 1
+      - type: temporal
         rank: M5
         tile_shape: 1
       - type: temporal
@@ -102,10 +105,13 @@ mapping:
       - type: compute
         einsum: AttentionValue
         target: 2  # level 3 is bound to MACC
-    - - type: temporal
-        rank: P6
-        tile_shape: 64
-      - type: spatial
+    - - type: spatial
+        rank: B6
+        tile_shape: 1
+      - type: temporal
+        rank: B6
+        tile_shape: 1
+      - type: temporal
         rank: P6
         tile_shape: 1
       - type: temporal
