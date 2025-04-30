@@ -9,7 +9,7 @@ mapping:
     dspace: [Filter1, Filter2]
   - type: temporal #---------------------------------- node 2.b
     rank: P2
-    tile_shape: 16
+    tile_shape: 4
   - type: storage  #---------------------------------- node 2.c
     target: 1  # level 1 is bound to DRAM
     dspace: [Fmap1, Fmap2, Fmap3]
@@ -17,10 +17,10 @@ mapping:
     branches:
     - - type: temporal
         rank: C1
-        tile_shape: 64 #4096//(8)
+        tile_shape: 256 #4096//(8)
       # - type: temporal
       #   rank: M1
-      #   tile_shape: 64
+      #   tile_shape: 128
       - type: spatial
         rank: C1
         tile_shape: 1
@@ -32,10 +32,10 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: temporal
         rank: C2
-        tile_shape: 64 #14336//(8)
+        tile_shape: 256 #14336//(8)
       # - type: temporal
       #   rank: M2
-      #   tile_shape: 64
+      #   tile_shape: 128
       - type: spatial
         rank: C2
         tile_shape: 1
