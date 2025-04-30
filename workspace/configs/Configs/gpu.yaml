@@ -66,6 +66,6 @@ architecture:
       attributes:
         num_pipeline_stages: 1
         datawidth: 16
-        width: 16
+        width: 64
         cycle_time: 1e-9
       required_actions: ['compute']
