@@ -4,32 +4,17 @@ mapping:
   - type: storage
     target: 0  # level 0 is bound to global DRAM
     dspace: [I, WK, K, WQ, Q, QK, WV, V, AV, Z, WZ] #-------- node 2.a
-  - type: storage
-    target: 1  # level 1 is bound to DRAM
-    dspace: [WK, WQ, WV]
   - type: temporal
     rank: B6
-    tile_shape: 16
-  # - type: temporal
-  #   rank: B1
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B2
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B3
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B4
-  #   tile_shape: 8
-  # - type: temporal
-  #   rank: B5
-  #   tile_shape: 8
+    tile_shape: 6
+  - type: storage
+    target: 1  # level 1 is bound to DRAM
+    dspace: [WK, K, WQ, Q, QK, WV, V, AV, WZ]
   - type: sequential  #------------------------------- node 2.d
     branches:
     - - type: temporal
         rank: M1
-        tile_shape: 64
+        tile_shape: 1024
       - type: spatial
         rank: M1
         tile_shape: 1
@@ -44,7 +29,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: temporal
         rank: M2
-        tile_shape: 64
+        tile_shape: 1024
       - type: spatial
         rank: M2
         tile_shape: 1
@@ -59,7 +44,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: temporal
         rank: M3
-        tile_shape: 64
+        tile_shape: 1024
       - type: spatial
         rank: M3
         tile_shape: 1
@@ -74,7 +59,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: temporal
         rank: M4
-        tile_shape: 64
+        tile_shape: 1024
       - type: spatial
         rank: M4
         tile_shape: 1
@@ -89,7 +74,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: temporal
         rank: M5
-        tile_shape: 64
+        tile_shape: 1024
       - type: spatial
         rank: M5
         tile_shape: 1
@@ -104,7 +89,7 @@ mapping:
         target: 2  # level 3 is bound to MACC
     - - type: temporal
         rank: P6
-        tile_shape: 64
+        tile_shape: 1024
       - type: spatial
         rank: P6
         tile_shape: 1

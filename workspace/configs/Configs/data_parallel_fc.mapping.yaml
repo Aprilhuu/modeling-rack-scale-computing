@@ -4,15 +4,12 @@ mapping:
   - type: storage
     target: 0  # level 0 is bound to global DRAM
     dspace: [Filter1, Filter2, Fmap1, Fmap3] #-------- node 2.a
-  - type: storage
-    target: 1  # level 1 is bound to DRAM
-    dspace: [Filter1, Filter2]
   - type: temporal #---------------------------------- node 2.b
     rank: P2
-    tile_shape: 8
+    tile_shape: 4
   - type: storage  #---------------------------------- node 2.c
     target: 1  # level 1 is bound to DRAM
-    dspace: [Fmap1, Fmap2, Fmap3]
+    dspace: [Filter1, Filter2, Fmap1, Fmap2, Fmap3]
   - type: sequential  #------------------------------- node 2.d
     branches:
     - - type: temporal
