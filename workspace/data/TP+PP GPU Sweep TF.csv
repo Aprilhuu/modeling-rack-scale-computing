@@ -1,0 +1,4 @@
+GPU #,Compute Latency,Global Memory Read Energy,Global Memory Write Energy,GPU Memory Read Energy,GPU Memory Write Energy,Compute Energy,Communication Energy
+12,"7,667,712.00",1.10E+12,2.75E+11,6.61E+12,1.94E+12,8.24E+10,
+24,"3,833,856.00",1.10E+12,2.75E+11,6.61E+12,1.94E+12,8.24E+10,
+48,"1,916,928.00",1.10E+12,2.75E+11,6.61E+12,1.94E+12,8.24E+10,

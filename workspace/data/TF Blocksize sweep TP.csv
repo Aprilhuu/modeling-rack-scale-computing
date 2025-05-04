@@ -1,0 +1,6 @@
+Blocksize,Compute Latency,Global Memory Read Energy,Global Memory Write Energy,GPU Memory Read Energy,GPU Memory Write Energy,Compute Energy,Communication Energy
+64,6291456,1.10E+12,2.75E+11,6.61E+12,1.94E+12,8.24E+10,
+128,3145728,1.10E+12,2.75E+11,6.60E+12,1.93E+12,8.24E+10,
+256,1572864,1.10E+12,2.75E+11,6.59E+12,1.93E+12,8.24E+10,
+512,786432,1.10E+12,2.75E+11,6.58E+12,1.93E+12,8.24E+10,
+1024,786432,1.10E+12,2.75E+11,6.61E+12,1.94E+12,8.24E+10,
